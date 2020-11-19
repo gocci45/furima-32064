@@ -1,24 +1,81 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column            | Type    | Options     |
+| ----------------- | ------- | ----------- |
+| nickname          | string  | null: false |
+| email             | string  | null: false |
+| password          | string  | null: false |
+| family_name       | string  | null: false |
+| first_name        | string  | null: false |
+| family_katakana   | string  | null: false |
+| first_katakana    | string  | null: false |
+| year              | integer | null: false |
+| month             | integer | null: false |
+| day               | integer | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :things , dependent: :destroy
+- has_one :buyer , dependent: :destroy
 
-* Configuration
+## buyer テーブル
 
-* Database creation
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| family_name     | string     | null: false                    |
+| first_name      | string     | null: false                    |
+| family_katakana | string     | null: false                    |
+| first_katakana  | string     | null: false                    |
+| post_number     | string     | null: false                    |
+| adress          | string     | null: false                    |
+| tatemono        | string     |                                |
+| tel_number      | string     |                                |
+| user_id         | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :users
+- has_many :things
 
-* Services (job queues, cache servers, search engines, etc.)
+## thing テーブル
 
-* Deployment instructions
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| name        | string     | null: false,                   |
+| text        | string     | null: false,                   |
+| cost        | string     | null: false,                   |
+| hassou_days | string     | null: false,                   |
+| price       | string     | null: false,                   |
+| brand_id    | references | null: false, foreign_key: true |
+| category_id | references | null: false, foreign_key: true |
+| user_id     | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :buyer
+- belongs_to :user , dependent: :destroy
+- belongs_to :category
+- belongs_to :brand
+
+## category テーブル
+
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| category_name  | string | null: false |
+| category_jotai | string | null: false |
+
+### Association
+
+- has_many :things
+
+## brand テーブル
+
+| Column     | Type   | Options     |
+| ---------- | ------ | ----------- |
+| brand_name | string |             |
+
+### Association
+
+- has_many :things
