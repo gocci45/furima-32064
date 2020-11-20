@@ -24,7 +24,7 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_number     | string     | null: false                    |
-| prefectures_id  | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | city_number     | string     | null: false                    |
 | building        | string     |                                |
@@ -33,6 +33,7 @@
 ### Association
 
 - belongs_to :user
+- has_many :purchases
 
 
 ## items テーブル
@@ -42,11 +43,12 @@
 | name               | string     | null: false                    |
 | text               | text       | null: false                    |
 | cost_id            | integer    | null: false                    |
-| shipping_days_id   | integer    | null: false                    |
+| shipping_day_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
 | shipping_adress_id | integer    | null: false                    |
 | status_id          | integer    | null: false                    |
+| user               | reference  | null: false, foreign_key: true |
 
 ### Association
 
@@ -57,10 +59,11 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| user_id            | reference  | null: false, foreign_key: true |
-| items_id           | reference  | null: false, foreign_key: true |
+| user               | reference  | null: false, foreign_key: true |
+| items              | reference  | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many :items 
+- belongs_to :item
+- belongs_to :address
