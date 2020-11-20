@@ -16,7 +16,8 @@
 ### Association
 
 - has_many :items 
-- has_one :profile, dependent: :destroy
+- has_one :address, dependent: :destroy
+- has_many :products, dependent: :destroy
 
 ## address テーブル
 
@@ -50,3 +51,17 @@
 ### Association
 
 - belongs_to :user 
+- belongs_to :product
+
+## products テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user_id            | reference  | null: false, foreign_key: true |
+| items_id           | reference  | null: false, foreign_key: true |
+| buy_day            | date       | null: false                    |
+
+### Association
+
+- belongs_to :user
+- has_many :items 
