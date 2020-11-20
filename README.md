@@ -24,14 +24,15 @@
 | --------------- | ---------- | ------------------------------ |
 | post_number     | string     | null: false                    |
 | prefecture_id   | integer    | null: false                    |
-| city            | reference  | null: false, foreign_key: true |
-| city_number     | reference  | null: false, foreign_key: true |
-| building        | reference  | null: false, foreign_key: true |
-| tel_number      | reference  | null: false, foreign_key: true |
+| city            | string     | null: false                    |
+| city_number     | string     | null: false                    |
+| building        | string     | null: false                    |
+| tel_number      | string     | null: false                    |
+| purchase        | reference  | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :purchases
+- belongs_to :purchase
 
 
 ## items テーブル
