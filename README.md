@@ -2,78 +2,66 @@
 
 ## users テーブル
 
-| Column            | Type    | Options     |
-| ----------------- | ------- | ----------- |
-| nickname          | string  | null: false |
-| email             | string  | null: false |
-| password          | string  | null: false |
-| family_name       | string  | null: false |
-| first_name        | string  | null: false |
-| family_katakana   | string  | null: false |
-| first_katakana    | string  | null: false |
-| birthday          | date    | null: false |
-| month             | integer | null: false |
-| day               | integer | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| family_name        | string  | null: false |
+| first_name         | string  | null: false |
+| family_katakana    | string  | null: false |
+| first_katakana     | string  | null: false |
+| birthday           | date    | null: false |
 
 ### Association
 
-- has_many :item , dependent: :destroy
+- has_many :items , dependent: :destroy , through: buyer_item
 - has_one :buyer , dependent: :destroy
 
-## buyer テーブル
+## buyers テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | post_number     | string     | null: false                    |
-| adress          | string     | null: false                    |
-| todohuken       | string     | null: false                    |
+| prefectures     | string     | null: false                    |
 | city            | string     | null: false                    |
-| banchi          | string     | null: false                    |
-| tatemono        | string     |                                |
+| city_number     | string     | null: false                    |
+| building        | string     |                                |
 | tel_number      | string     | null: false                    |
 
 ### Association
 
 - belongs_to :users
-- has_many :item , through: buyer_item
+- has_many :items
 
-## item テーブル
+## items テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| name        | string     | null: false                    |
-| text        | text       | null: false                    |
-| cost        | string     | null: false                    |
-| hassou_days | string     | null: false                    |
-| price       | integer    | null: false                    |
-| category_id | integer    | null: false                    |
-| item_id     | integer    | null: false                    |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| text               | text       | null: false                    |
+| cost_id            | references | null: false, foreign_key: true |
+| shipping_days_id   | references | null: false, foreign_key: true |
+| price              | integer    | null: false                    |
+| category_id        | references | null: false, foreign_key: true |
+| item_id            | references | null: false, foreign_key: true |
+| shipping_adress_id | references | null: false, foreign_key: true |
+| status_id          | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :buyer , through: buyer_item
-- belongs_to :user , dependent: :destroy
-- belongs_to :category
+- belongs_to :buyer 
+- belongs_to :user , dependent: :destroy , through: buyer_item
 
-## buyer_item テーブル
+## user_item テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| buyer  | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
 | item   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :buyer
+- belongs_to :user
 - belongs_to :item
 
-## category テーブル
-
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| category_name  | string | null: false |
-| category_jotai | string | null: false |
-
-### Association
-
-- has_many :item
