@@ -58,7 +58,7 @@ RSpec.describe User, type: :model do
       @user.password = 'aiu123'
       @user.password_confirmation = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include
     end
 
     it 'passwordは確認以外も含め２回入力しないとは登録できないこと' do
@@ -79,14 +79,14 @@ RSpec.describe User, type: :model do
       @user.password = 11_111_111
       @user.password_confirmation = 11_111_111
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include
     end
 
     it 'passwordが英字では登録できないこと' do
       @user.password = 'aaaaaaaa'
       @user.password_confirmation = 'aaaaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include
     end
 
     it '苗字が空白では登録できないこと' do
