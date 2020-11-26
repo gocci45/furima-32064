@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   private
 
   def move_to_index 
-    @item = Prototype.find(params[:id])
+    @item = Item.find(params[:id])
     unless current_user.id ==  @item.user.id
         redirect_to root_path
     end
