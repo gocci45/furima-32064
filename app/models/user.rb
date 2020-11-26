@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, password_length: 6..128
 
+  has_one :items
+
   
   VALID_PASSWORD_REGEX = /\A[a-zA-Z0-9]+\z/.freeze
   VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/.freeze
