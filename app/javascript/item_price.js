@@ -1,6 +1,5 @@
 function post (){
   const priceInput = document.getElementById("item-price");
-  console.log(priceInput)
   priceInput.addEventListener("keyup",() => {
     const countVal = priceInput.value;
     if( countVal >= 300 && countVal <= 9999999) {

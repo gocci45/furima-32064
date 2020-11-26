@@ -16,7 +16,7 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :text
-    validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 10000000 }, format: { with: VALID_NUM_REGEX }
+    validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }, format: { with: VALID_NUM_REGEX }
     with_options numericality: { other_than: 1 } do
       validates :cost_id
       validates :category_id

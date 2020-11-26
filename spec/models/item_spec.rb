@@ -97,7 +97,7 @@ RSpec.describe Item, type: :model do
     it '価格の情報が300円未満だと保存されない' do
       @item.price = 299
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price must be greater than 300")
+      expect(@item.errors.full_messages).to include("Price must be greater than 299")
     end
 
     it '価格の情報が10000000円以上だと保存されない' do
@@ -110,6 +110,12 @@ RSpec.describe Item, type: :model do
       @item.user = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("User must exist")
+    end
+
+    it '画像が空欄だと保存できない' do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
     end
   end
 end
