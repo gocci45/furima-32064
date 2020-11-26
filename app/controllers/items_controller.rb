@@ -5,16 +5,13 @@ class ItemsController < ApplicationController
   end
 
   def new
-    if user_signed_in?
       @item = Item.new
-    else
-      render :index
-    end
   end
 
   def create
-    @item = Item.create(item_params)
-    if @item.save
+    @item = Item.new(item_params)
+    if @item.valid?
+      @item.save
       redirect_to root_path
     else
       render :new
