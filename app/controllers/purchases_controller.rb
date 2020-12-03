@@ -1,9 +1,8 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_method
   before_action :sold_out_item, only: [:index]
-  before_action :move_to_index
-  before_action :item_method, only: [:move_to_index , :sold_out_item]
-
+  before_action :move_to_index  
 
   def index
     @orderform = Orderform.new
