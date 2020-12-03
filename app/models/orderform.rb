@@ -13,6 +13,8 @@ class Orderform
     validates :city_number
     validates :tel_number , format: { with: /\A\d{10}\z|\A\d{11}\z/ }
     validates :token
+    validates :user_id
+    validates :item_id
   end
   with_options numericality: { other_than: 1 } do
     validates :shipping_address_id

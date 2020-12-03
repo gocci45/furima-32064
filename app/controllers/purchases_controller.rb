@@ -4,7 +4,6 @@ class PurchasesController < ApplicationController
   before_action :move_to_index
 
   def index
-    @item = Item.find(params[:item_id])
     @orderform = Orderform.new
   end
 
@@ -12,12 +11,10 @@ class PurchasesController < ApplicationController
   def create
     @orderform = Orderform.new(orderform_params)
     if @orderform.valid?
-      @item = Item.find(params[:item_id])
       pay_item
       @orderform.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
