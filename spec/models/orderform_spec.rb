@@ -78,5 +78,12 @@ RSpec.describe Orderform, type: :model do
       @orderform.valid?
       expect(@orderform.errors.full_messages).to include("Token can't be blank")
     end
+
+    it '電話番号が12けたの場合保存できない' do
+      @orderform.tel_number = 111111111111
+      @orderform.valid?
+      expect(@orderform.errors.full_messages).to include("Tel number is invalid")
+    end
+
   end
 end

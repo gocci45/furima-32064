@@ -22,7 +22,6 @@ class PurchasesController < ApplicationController
   private
   def orderform_params
     params.require(:orderform).permit(:post_number , :shipping_address_id , :city , :city_number , :building , :tel_number).merge(user_id: current_user.id, item_id: params[:item_id] , token: params[:token])
-    # params = {orderform: {post_number:"---" } }
   end
 
   def pay_item
