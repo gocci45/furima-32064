@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe Orderform, type: :model do
   describe '#create' do
     before do
-      @orderform = FactoryBot.build(:orderform)
+      sleep 1
+      buyer = FactoryBot.create(:user)
+      seller = FactoryBot.create(:user)
+      item = FactoryBot.create(:item , user_id: seller.id)
+      @orderform = FactoryBot.build(:orderform , user_id: buyer.id , item_id: item.id)
     end
 
     it '全ての条件が揃っている' do
