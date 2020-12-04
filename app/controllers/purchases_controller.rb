@@ -1,10 +1,10 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
-  before_action :item_method
   before_action :sold_out_item, only: [:index]
   before_action :move_to_index  
 
   def index
+    @item = Item.find(params[:item_id])
     @orderform = Orderform.new
   end
 
@@ -12,10 +12,12 @@ class PurchasesController < ApplicationController
   def create
     @orderform = Orderform.new(orderform_params)
     if @orderform.valid?
+      @item = Item.find(params[:item_id])
       pay_item
       @orderform.save
       redirect_to root_path
     else
+      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -35,17 +37,15 @@ class PurchasesController < ApplicationController
   end
 
   def sold_out_item
+    @item = Item.find(params[:item_id])
     redirect_to root_path if @item.purchase.present?
     end
   end
 
    def move_to_index 
+    @item = Item.find(params[:item_id])
     if current_user.id ==  @item.user.id
         redirect_to root_path
     end
-
-    def item_method
-      @item = Item.find(params[:id])
-    end
-
 end
+
